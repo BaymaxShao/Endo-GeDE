@@ -11,7 +11,7 @@ In this repository, **the evaluation code and instruction** have been released. 
 ## Installation
 **Information of Our Platform**: Ubuntu 22.04 + NVIDIA RTX 4090 *1 + CUDA 11.8
 
-**Anaconda Enviroment**: `requirements.txt`
+**Anaconda Enviroment**: `pip install -r requirements.txt`
 
 ## Data Preparation
 
