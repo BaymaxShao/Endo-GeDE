@@ -3,6 +3,7 @@
 </p>
 
 Here is the pre-released implementation for "**G**eneralizable Self-supervised <ins>Mo</ins>nocular <ins>D</ins>epth <ins>E</ins>stimation with Block-wise Mixture of Low-Rank Experts for **V**arious <ins>E</ins>ndoscopic Scenes". 
+![](assets/teaser.png)
 
 In this repository, **the evaluation code and instruction** have been released. <ins>The whole code will be published upon acceptance</ins>.
 
