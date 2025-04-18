@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://capsule-render.vercel.app/api?color=0000FF&type=waving&fontAlignY=35&text=GD-EMoDE&fontColor=FFFFFF&desc=Generalizable%20Self-supervised%20Monocular%20Depth%20Estimation%20for%20Various%20Endoscopic%20Scenes&height=250" />
+<img src="https://capsule-render.vercel.app/api?color=0000FF&type=waving&fontAlignY=35&text=GD-EMoDE&fontColor=FFFFFF&desc=Generalizable%20Self-supervised%20Monocular%20Depth%20Estimation%20for%20Diverse%20Endoscopic%20Scenes&height=250" />
 </p>
 
 ![](assets/teaser.png)
