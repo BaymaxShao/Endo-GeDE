@@ -25,6 +25,33 @@ In this repository, **the evaluation code and instruction** have been released. 
 _Sincerely thanks for the remarkable contribution from above datasets to the community!!!_
 
 ## Evaluation of Depth Estimation
-
-
+Firstly export ground truth of SCARED/SimCol dataset:
+```
+python export_gt_depth.py --data_path <data_path> --split endovis/simcol --usage eval
+```
+Then evaluate the depth estimation model on
+- SCARED/Hamlyn dataset:
+```
+python evaluate_depth.py --data_path <data_path> --load_weights_folder <weights_path> --model_type <model_type> --peft_type <peft_type> --eval_split endovis/hamlyn --learn_intrinsics <True/False> --visualize_depth
+```
+- SERV-CT dataset:
+```
+python evaluate_depth.py --data_path <data_path> --load_weights_folder <weights_path> --model_type <model_type> --peft_type <peft_type> --eval_split servct --max_depth 200 --learn_intrinsics <True/False> --visualize_depth
+```
+- SimCol dataset:
+```
+python evaluate_depth.py --data_path <data_path> --load_weights_folder <weights_path> --model_type <model_type> --peft_type <peft_type> --eval_split simcol --weight 256 --max_depth 200 --learn_intrinsics <True/False> --visualize_depth
+```
+- C3VD dataset:
+```
+python evaluate_depth.py --data_path <data_path> --load_weights_folder <weights_path> --model_type <model_type> --peft_type <peft_type> --eval_split c3vd --weight 256 --max_depth 100 --learn_intrinsics <True/False> --visualize_depth
+```
+**The parse setting** for different methods are listed as the following table:
+|**Models**|`--model_type`|`--peft_type`|`--learn_intrinsics`|
+|:---:|:---:|:---:|:---:|
+|Ours|`gvemode`|`bwmole`|`True`|
+|EndoDAC|`endodac`|`part-dvlora`|`True`|
+|MonoPCC|`pcc`|`none`|`False`|
+|DVSMono|`pcc`|`none`|`False`|
+|IID-SfMLearner|`afsfm`|`none`|`False`|
 ## Evaluation of Ego-motion Estimation
