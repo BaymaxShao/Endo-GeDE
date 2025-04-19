@@ -24,6 +24,19 @@ In this repository, **the evaluation code and instruction** have been released. 
 
 _Sincerely thanks for the remarkable contribution from above datasets to the community!!!_
 
+## Pretrained Weights
+|Methods|From|Abs Rel|Sq Rel|RMSE|RMSE Log|$\delta$|Pretrained Weight|
+|:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|
+|AF-SfMLearner|**MedIA'22**|0.059|0.435|4.925|0.082|0.974|Download [Here](https://github.com/ShuweiShao/AF-SfMLearner/tree/main?tab=readme-ov-file#-model-zoo)|
+|Depth Anything\^|**CVPR'24**|0.055|0.410|4.769|0.078|0.973|Download [Here]()|
+|Depth Anything v2\^|**NeurIPS'24**|0.076|0.683|6.379|0.104|0.949|Download [Here]()|
+|DARES|**ECCV'24**|0.052|0.356|4.483|0.073|0.980|Download [Here](https://github.com/mobarakol/DARES?tab=readme-ov-file#model-zoo)|
+|IID-SfMLearner|**JBHI'24**|0.057|0.430|4.822|0.079|0.972|Download [Here]()|
+|DVSMono|**BIBM'24**|0.055|0.410|4.797|0.078|0.975|Download [Here](https://github.com/adam99goat/DVSMono/tree/main/AF_training_split)|
+|EndoDAC|**MICCAI'24**|0.052|0.362|4.464|0.072|0.979|Download [Here](https://github.com/BeileiCui/EndoDAC/tree/main?tab=readme-ov-file#results)|
+|MonoPCC|**MedIA'25**|0.051|0.349|4.488|0.072|0.983|Download [Here](https://github.com/adam99goat/MonoPCC/tree/main/evaluation_results/AF_training_split)|
+|**GD-EMoDE**|**Ours**|**0.047**|**0.307**|**4.206**|**0.067**|**0.985**|Download [Here]()|
+
 ## Evaluation of Depth Estimation
 Firstly export ground truth of SCARED/SimCol dataset:
 ```
@@ -49,9 +62,12 @@ python evaluate_depth.py --data_path <data_path> --load_weights_folder <weights_
 **The parse setting** for different methods are listed as the following table:
 |**Models**|`--model_type`|`--peft_type`|`--learn_intrinsics`|
 |:---:|:---:|:---:|:---:|
-|Ours|`gvemode`|`bwmole`|`True`|
+|**Ours**|`gdemode`|`bwmole`|`True`|
 |EndoDAC|`endodac`|`part-dvlora`|`True`|
+|Depth Anything(Finetuned)|`depthanything`|`none`|`True`|
+|DARES|`dares`|`none`|`False`|
 |MonoPCC|`pcc`|`none`|`False`|
 |DVSMono|`pcc`|`none`|`False`|
 |IID-SfMLearner|`afsfm`|`none`|`False`|
-## Evaluation of Ego-motion Estimation
+|AF-SfMLearner|`afsfm`|`none`|`False`|
+
