@@ -25,7 +25,7 @@ In this repository, **the evaluation code and instruction** have been released. 
 _Sincerely thanks for the remarkable contribution from above datasets to the community!!!_
 
 ## Pretrained Weights
-For **Realistic Datasets**:
+Trained on _SCARED dataset_ for **Realistic Datasets**:
 |Methods|From|Abs Rel|Sq Rel|RMSE|RMSE Log|$\delta$|Pretrained Weight|
 |:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|
 |AF-SfMLearner|**MedIA'22**|0.059|0.435|4.925|0.082|0.974|Download [Here](https://github.com/ShuweiShao/AF-SfMLearner/tree/main?tab=readme-ov-file#-model-zoo)|
@@ -38,7 +38,7 @@ For **Realistic Datasets**:
 |MonoPCC|**MedIA'25**|0.051|0.349|4.488|0.072|0.983|Download [Here](https://github.com/adam99goat/MonoPCC/tree/main/evaluation_results/AF_training_split)|
 |**GD-EMoDE**|**Ours**|**0.047**|**0.307**|**4.206**|**0.067**|**0.985**|Download [Here]()|
 
-For **Simulated Datasets**:
+Trained on _SimCol dataset_ for **Simulated Datasets**:
 |Methods|From|Abs Rel|Sq Rel|RMSE|RMSE Log|$\delta$|Pretrained Weight|
 |:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|
 |AF-SfMLearner|**MedIA'22**|0.086|0.080|0.426|0.109|0.950|Download [Here]()|
