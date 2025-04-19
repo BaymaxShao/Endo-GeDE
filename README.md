@@ -25,6 +25,8 @@ In this repository, **the evaluation code and instruction** have been released. 
 _Sincerely thanks for the remarkable contribution from above datasets to the community!!!_
 
 ## Pretrained Weights
+<sup>**Google Drive** is utilized to store weights.</sup>
+
 Trained on _SCARED dataset_ for **Realistic Datasets**:
 |Methods|From|Abs Rel|Sq Rel|RMSE|RMSE Log|$\delta$|Pretrained Weight|
 |:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|
