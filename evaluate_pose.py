@@ -135,14 +135,12 @@ def evaluate(opt):
         num_frames = gt_local_poses.shape[0]
         track_length = 5
         for j in range(0, num_frames - 1):
-            local_xyzs = np.array(dump_xyz(pred_pos[i:i + track_length - 1]))
-            gt_local_xyzs = np.array(dump_xyz(gt_local_poses[i:i + track_length - 1]))
-            local_rs = np.array(dump_r(pred_pos[i:i + track_length - 1]))
-            gt_rs = np.array(dump_r(gt_local_poses[i:i + track_length - 1]))
+            local_xyzs = np.array(dump_xyz(pred_pos[j:j + track_length - 1]))
+            gt_local_xyzs = np.array(dump_xyz(gt_local_poses[j:j + track_length - 1]))
+            local_rs = np.array(dump_r(pred_pos[j:j + track_length - 1]))
+            gt_rs = np.array(dump_r(gt_local_poses[j:j + track_length - 1]))
             ates.append(compute_ate(gt_local_xyzs, local_xyzs))
             res.append(compute_re(local_rs, gt_rs))
-        cls = st.t.interval(confidence=0.95, df=len(ates) - 1, loc=np.mean(ates), scale=st.sem(ates))
-        cls = np.array(cls)
         print("\n Absolute Trajectory Error of Seq. {}: {:0.4f}".format(i, np.mean(ates)))
 
 
