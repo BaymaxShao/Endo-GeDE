@@ -19,7 +19,7 @@ def export_gt_depths_SCARED():
     parser.add_argument('--sequence',
                         type=str,
                         help='export gt from which sequence',
-                        choices=["sequence1", "sequence2", "sequence3", "sequence4", "sequence5"],
+                        choices=["sequence1", "sequence2", "sequence3", "sequence4"],
                         default="sequence2")
     parser.add_argument('--split',
                         type=str,
