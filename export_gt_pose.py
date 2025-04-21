@@ -56,7 +56,7 @@ def export_gt_depths_SCARED():
 
         gt_Ts.append(T)
 
-    output_path = os.path.join(split_folder, "curve", "gt_poses_"+opt.sequence+".npz")
+    output_path = os.path.join(split_folder, "trajectories", "gt_poses_"+opt.sequence+".npz")
 
     print("Saving to {}".format(opt.split))
 
