@@ -12,6 +12,7 @@ from utils.layers import transformation_from_parameters
 from utils.utils import readlines
 from options import MonodepthOptions
 from datasets import SCAREDRAWDataset
+import scipy.stats as st
 
 
 # from https://github.com/tinghuiz/SfMLearner
@@ -143,7 +144,7 @@ def evaluate(opt):
             pred_Ks.append(pred_K)
         gt_path = os.path.join(os.path.dirname(__file__), "splits", "endovis", "curve", "gt_poses_sequence{}.npz".format(num))
         gt_local_poses = np.load(gt_path, fix_imports=True, encoding='latin1')["data"]
-        pred_path = os.path.join(os.path.dirname(__file__), "splits", "endovis", "curve", "pred_poses_sequence{}.npz".format(num))
+        pred_path = os.path.join(os.path.dirname(__file__), "af", "pred_poses_sequence{}.npz".format(num))
         np.savez_compressed(pred_path, data=np.array(pred_pos))
         ates = []
         res = []
@@ -156,7 +157,13 @@ def evaluate(opt):
             gt_rs = np.array(dump_r(gt_local_poses[i:i + track_length - 1]))
             ates.append(compute_ate(gt_local_xyzs, local_xyzs))
             res.append(compute_re(local_rs, gt_rs))
-        print("\n   sq{} Trajectory error: {:0.4f}, std: {:0.4f}\n".format(i+1, np.mean(ates), np.std(ates)))
+        cls = st.t.interval(confidence=0.95, df=len(ates) - 1, loc=np.mean(ates), scale=st.sem(ates))
+        cls = np.array(cls)
+        print("\n   sq1 Trajectory error: {:0.4f}, std: {:0.4f}, 95% cls: [{:0.4f}, {:0.4f}]\n".format(np.mean(ates),
+                                                                                                       np.std(ates),
+                                                                                                       cls[0],
+                                                                                                       cls[1]))
+        print("\n   sq1 Rotation error: {:0.4f}, std: {:0.4f}\n".format(np.mean(res), np.std(res)))
 
     if opt.learn_intrinsics:
         pred_intrinsics = np.concatenate(pred_Ks, axis=0)

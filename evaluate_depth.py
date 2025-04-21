@@ -16,7 +16,7 @@ from options import MonodepthOptions
 import datasets
 import models.encoders as encoders
 import models.decoders as decoders
-import models.gvemode as gvemode
+import models.gdemode as gdemode
 
 cv2.setNumThreads(0)  # This speeds up evaluation 5x on our unix systems (OpenCV 3.3.1)
 
@@ -57,16 +57,7 @@ def evaluate(opt):
         "Please choose mono or stereo evaluation by setting either --eval_mono or --eval_stereo"
 
     if opt.ext_disp_to_eval is None:
-        if not opt.model_type == 'depthanything':
-            opt.load_weights_folder = os.path.expanduser(opt.load_weights_folder)
-            assert os.path.isdir(opt.load_weights_folder), \
-                "Cannot find a folder at {}".format(opt.load_weights_folder)
-
-            print("-> Loading weights from {}".format(opt.load_weights_folder))
-        else:
-            print("Evaluating Depth Anything model")
-
-        if opt.model_type == 'gvemode' or opt.model_type == 'dares':
+        if opt.model_type == 'gdemode' or 'dares' or 'endodac' or 'depthanything':
             depther_path = os.path.join(opt.load_weights_folder, "depth_model.pth")
             depther_dict = torch.load(depther_path)
         elif opt.model_type == 'afsfm' or opt.model_type == 'pcc':
@@ -100,9 +91,9 @@ def evaluate(opt):
         dataloader = DataLoader(dataset, 1, shuffle=False, num_workers=opt.num_workers,
                                 pin_memory=True, drop_last=False)
 
-        if opt.model_type == 'gvemode':
-            depther = gvemode.gv_emode(
-                backbone_size = "base", r=opt.lora_rank, lora_type=opt.lora_type,
+        if opt.model_type == 'gdemode' or 'endodac' or 'depthanything':
+            depther = gdemode.gd_emode(
+                backbone_size = "base", r=opt.lora_rank, peft_type=opt.peft_type,
                 image_shape=(224,280), pretrained_path=opt.pretrained_path,
                 residual_block_indexes=opt.residual_block_indexes,
                 include_cls_token=opt.include_cls_token)
@@ -112,20 +103,11 @@ def evaluate(opt):
             depther.cuda()
             depther.eval()
         elif opt.model_type == 'dares':
-            depther = gvemode.DARES()
+            depther = gdemode.DARES()
 
             model_dict = depther.state_dict()
 
             depther.load_state_dict({k: v for k, v in depther_dict.items() if k in model_dict})
-            depther.cuda()
-            depther.eval()
-
-        elif opt.model_type == 'depthanything':
-            depther = gvemode.gvemode(
-                backbone_size = "base", r=opt.lora_rank, lora_type=opt.lora_type,
-                image_shape=(224,280), pretrained_path=opt.pretrained_path,
-                residual_block_indexes=opt.residual_block_indexes,
-                include_cls_token=opt.include_cls_token)
             depther.cuda()
             depther.eval()
         elif opt.model_type == 'afsfm':
@@ -143,7 +125,6 @@ def evaluate(opt):
             encoder = encoders.mpvit_small()
             encoder.num_ch_enc = [64, 128, 216, 288, 288]
             depth_decoder = decoders.HRDepthDecoder()
-
             model_dict = encoder.state_dict()
             encoder.load_state_dict({k: v for k, v in encoder_dict.items() if k in model_dict})
             depth_decoder.load_state_dict(torch.load(decoder_path))

@@ -34,11 +34,11 @@ class MonodepthOptions:
                                  type=str,
                                  help="pretrained weights path",
                                  default=os.path.join(file_dir, "pretrained_model"))
-        self.parser.add_argument("--lora_type",
+        self.parser.add_argument("--peft_type",
                                  type=str,
-                                 help="which lora type use for the model",
-                                 choices=["lora", "dvlora", "none", "part-dvlora", "adalora", "hdlora", "lawmoe"],
-                                 default="dvlora")
+                                 help="which peft type use for the model",
+                                 choices=["lora", "dvlora", "none", "part-dvlora", "adalora", "hdlora", "bwmole"],
+                                 default="bwmole")
         self.parser.add_argument("--lora_rank",
                                  type=int,
                                  help="the rank of lora",
@@ -64,12 +64,11 @@ class MonodepthOptions:
         self.parser.add_argument("--model_name",
                                  type=str,
                                  help="the name of the folder to save the model in",
-                                 default="gvemode")
+                                 default="gdemode")
         self.parser.add_argument("--split",
                                  type=str,
                                  help="which training split to use",
-                                 choices=["endovis", "simcol", "endoslam",
-                                          "endoslam/Colon", "endoslam/Small_Intestine", "endoslam/Stomach"],
+                                 choices=["endovis", "simcol"],
                                  default="endovis")
         self.parser.add_argument("--num_layers",
                                  type=int,
@@ -225,8 +224,8 @@ class MonodepthOptions:
         self.parser.add_argument("--model_type",
                                  type=str,
                                  help="which training split to use",
-                                 choices=["gvemode", "afsfm", "depthanything", "pcc", "dares"],
-                                 default="gvemode")
+                                 choices=["gdemode", "afsfm", "depthanything", "pcc", "dares"],
+                                 default="gdemode")
         self.parser.add_argument("--eval_stereo",
                                  help="if set evaluates in stereo mode",
                                  action="store_true")
@@ -247,8 +246,7 @@ class MonodepthOptions:
                                  type=str,
                                  default="endovis",
                                  choices=[
-                                    "hamlyn", "c3vd", "endovis", "simcol", "endoslam", "servct",
-                                     "endoslam/Colon", "endoslam/Small_Intestine", "endoslam/Stomach"],
+                                    "hamlyn", "c3vd", "endovis", "simcol", "endoslam", "servct"],
                                  help="which split to run eval on")
         self.parser.add_argument("--save_pred_disps",
                                  help="if set saves predicted disparities",

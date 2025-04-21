@@ -8,19 +8,19 @@ from utils import readlines
 from utils.layers import *
 
 
-def export_gt_poses_SCARED():
+def export_gt_depths_SCARED():
 
     parser = argparse.ArgumentParser(description='export_gt_pose')
 
     parser.add_argument('--data_path',
                         type=str,
                         help='path to the root of the KITTI data',
-                        default='/media/slj/D8B49B23B49B02E4/endovis_data')
+                        default='endovis_data')
     parser.add_argument('--sequence',
                         type=str,
                         help='export gt from which sequence',
                         choices=["sequence1", "sequence2", "sequence3", "sequence4", "sequence5"],
-                        default="sequence1")
+                        default="sequence2")
     parser.add_argument('--split',
                         type=str,
                         help='which split to export gt from',
@@ -65,4 +65,4 @@ def export_gt_poses_SCARED():
 
 
 if __name__ == "__main__":
-    export_gt_poses_SCARED()
+    export_gt_depths_SCARED()
