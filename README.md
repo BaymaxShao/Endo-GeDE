@@ -70,7 +70,7 @@ python evaluate_depth.py --data_path <data_path> --load_weights_folder <weights_
 ```
 python evaluate_depth.py --data_path <data_path> --load_weights_folder <weights_path> --model_type <model_type> --peft_type <peft_type> --eval_split c3vd --weight 256 --max_depth 100 --learn_intrinsics <True/False> --visualize_depth
 ```
-**The parse setting** for different methods are listed as the following table:
+**The parse settings** for different methods are listed as the following table:
 |**Models**|`--model_type`|`--peft_type`|`--learn_intrinsics`|
 |:---:|:---:|:---:|:---:|
 |**Ours**|`gdemode`|`bwmole`|`True`|
@@ -81,4 +81,14 @@ python evaluate_depth.py --data_path <data_path> --load_weights_folder <weights_
 |DVSMono|`pcc`|`none`|`False`|
 |IID-SfMLearner|`afsfm`|`none`|`False`|
 |AF-SfMLearner|`afsfm`|`none`|`False`|
-
+## Evaluation of Ego-motion Estimation
+Firstly export ground truth of SCARED dataset:
+```
+python export_gt_depth.py --data_path <data_path> --sequence 1/2/3/4
+```
+Then evaluate the ego-motion estimation model on exported trajectories:
+```
+python evaluate_depth.py --data_path <data_path> --load_weights_folder <weights_path> --model_type <model_type>
+```
+The parse setting of `model_type` is same as the above table. 
+(only the ego-motion estimation weights of EndoDAC, DARES, MonoPCC, IID-SfM and AF-SfM are available.)
