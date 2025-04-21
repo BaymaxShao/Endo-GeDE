@@ -76,7 +76,7 @@ def evaluate(opt):
     assert os.path.isdir(opt.load_weights_folder), \
         "Cannot find a folder at {}".format(opt.load_weights_folder)
 
-    num_seq = [1,2,3,4,5]
+    num_seq = [1,2,3,4]
     filenames = []
     for num in num_seq:
         frames = readlines(
@@ -94,19 +94,12 @@ def evaluate(opt):
     pose_decoder = decoders.PoseDecoder(pose_encoder.num_ch_enc, 1, 2)
     pose_decoder.load_state_dict(torch.load(pose_decoder_path))
 
-    if opt.learn_intrinsics:
-        intrinsics_decoder = decoders.IntrinsicsHead(pose_encoder.num_ch_enc)
-        intrinsics_decoder.load_state_dict(torch.load(intrinsics_decoder_path))
-        intrinsics_decoder.cuda()
-        intrinsics_decoder.eval()
-
     pose_encoder.cuda()
     pose_encoder.eval()
     pose_decoder.cuda()
     pose_decoder.eval()
 
     pred_poses = []
-    pred_intrinsics = []
     opt.frame_ids = [0, 1]
     print("-> Computing pose predictions")
     with torch.no_grad():
@@ -116,7 +109,6 @@ def evaluate(opt):
             dataloader = DataLoader(dataset, 1, shuffle=False,
                                  num_workers=opt.num_workers, pin_memory=True, drop_last=False)
             pred_poses_0 = []
-            pred_intrinsics_0 =[]
             for inputs in tqdm(dataloader):
                 for key, ipt in inputs.items():
                     inputs[key] = ipt.cuda()
@@ -128,29 +120,21 @@ def evaluate(opt):
 
                 pred_poses_0.append(
                     transformation_from_parameters(axisangle[:, 0], translation[:, 0]).cpu().numpy())
-
-                if opt.learn_intrinsics:
-                    cam_K = intrinsics_decoder(
-                        intermediate_feature, opt.width, opt.height)
-                    pred_intrinsics_0.append(cam_K[:, :3, :3].cpu().numpy())
+                
             pred_poses.append(pred_poses_0)
-            pred_intrinsics.append(pred_intrinsics_0)
 
-    pred_Ks = []
     for i, num in enumerate(num_seq):
         pred_pos = np.concatenate(pred_poses[i])
-        if opt.learn_intrinsics:
-            pred_K = np.concatenate(pred_intrinsics[i])
-            pred_Ks.append(pred_K)
-        gt_path = os.path.join(os.path.dirname(__file__), "splits", "endovis", "curve", "gt_poses_sequence{}.npz".format(num))
+        gt_path = os.path.join(os.path.dirname(__file__), "splits", "endovis", "trajectories", "gt", "gt_poses_sequence{}.npz".format(num))
         gt_local_poses = np.load(gt_path, fix_imports=True, encoding='latin1')["data"]
-        pred_path = os.path.join(os.path.dirname(__file__), "af", "pred_poses_sequence{}.npz".format(num))
+        pred_path = os.path.join(os.path.dirname(__file__), "splits", "endovis", "trajectories", opt.model_type, "pred_poses_sequence{}.npz".format(num))
+        os.makedirs(pred_path, exist_ok=True)
         np.savez_compressed(pred_path, data=np.array(pred_pos))
         ates = []
         res = []
         num_frames = gt_local_poses.shape[0]
         track_length = 5
-        for i in range(0, num_frames - 1):
+        for j in range(0, num_frames - 1):
             local_xyzs = np.array(dump_xyz(pred_pos[i:i + track_length - 1]))
             gt_local_xyzs = np.array(dump_xyz(gt_local_poses[i:i + track_length - 1]))
             local_rs = np.array(dump_r(pred_pos[i:i + track_length - 1]))
@@ -159,22 +143,8 @@ def evaluate(opt):
             res.append(compute_re(local_rs, gt_rs))
         cls = st.t.interval(confidence=0.95, df=len(ates) - 1, loc=np.mean(ates), scale=st.sem(ates))
         cls = np.array(cls)
-        print("\n   sq1 Trajectory error: {:0.4f}, std: {:0.4f}, 95% cls: [{:0.4f}, {:0.4f}]\n".format(np.mean(ates),
-                                                                                                       np.std(ates),
-                                                                                                       cls[0],
-                                                                                                       cls[1]))
-        print("\n   sq1 Rotation error: {:0.4f}, std: {:0.4f}\n".format(np.mean(res), np.std(res)))
+        print("\n Absolute Trajectory Error of Seq. {}: {:0.4f}".format(i, np.mean(ates)))
 
-    if opt.learn_intrinsics:
-        pred_intrinsics = np.concatenate(pred_Ks, axis=0)
-        fx_mean, fx_std = np.mean(pred_intrinsics[:, 0, 0]) / opt.width, np.std(pred_intrinsics[:, 0, 0]) / opt.width
-        fy_mean, fy_std = np.mean(pred_intrinsics[:, 1, 1]) / opt.height, np.std(pred_intrinsics[:, 1, 1]) / opt.height
-        cx_mean, cx_std = np.mean(pred_intrinsics[:, 0, 2]) / opt.width, np.std(pred_intrinsics[:, 0, 2]) / opt.width
-        cy_mean, cy_std = np.mean(pred_intrinsics[:, 1, 2]) / opt.height, np.std(pred_intrinsics[:, 1, 2]) / opt.height
-        print("\n   fx: {:0.4f}, std: {:0.4f}\n".format(fx_mean, fx_std))
-        print("\n   fy: {:0.4f}, std: {:0.4f}\n".format(fy_mean, fy_std))
-        print("\n   cx: {:0.4f}, std: {:0.4f}\n".format(cx_mean, cx_std))
-        print("\n   cy: {:0.4f}, std: {:0.4f}\n".format(cy_mean, cy_std))
 
 
 if __name__ == "__main__":
