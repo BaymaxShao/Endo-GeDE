@@ -7,6 +7,13 @@
 Here is the pre-released implementation for "**G**eneralizable Self-supervised <ins>Mo</ins>nocular <ins>D</ins>epth <ins>E</ins>stimation with Block-wise Mixture of Low-Rank Experts for **D**iverse <ins>E</ins>ndoscopic Scenes". 
 
 In this repository, **the evaluation code and instruction** have been released. <ins>The whole code will be published upon acceptance</ins>.
+## Table of Contents
+- [Installation](#installation)
+- [Data Preparation](#data-preparation)
+- [Weights Preparation](#pretrained-weights)
+- [Depth Estimation](#evaluation-of-depth-estimation)
+- [Ego-motion Estimation](#evaluation-of-ego-motion-estimation)
+- [Acknowledgements](#acknowledgements)
 
 ## Installation
 **Information of Our Platform**: Ubuntu 22.04 + NVIDIA RTX 4090 *1 + CUDA 11.8
@@ -94,8 +101,8 @@ The parse setting of `model_type` is same as the above table.
 (only the ego-motion estimation weights of EndoDAC, DARES, MonoPCC, IID-SfM and AF-SfM are available.)
 
 ## Ackonwledgements
-This project is built based on [EndoDAC](https://github.com/BeileiCui/EndoDAC), [IID-SfMLearner](https://github.com/bobo909/IID-SfmLearner) and [AF-SfMLearner](https://github.com/ShuweiShao/AF-SfMLearner). Thanks for their published codes!
+This project is built based on [EndoDAC](https://github.com/BeileiCui/EndoDAC), [IID-SfMLearner](https://github.com/bobo909/IID-SfmLearner) and [AF-SfMLearner](https://github.com/ShuweiShao/AF-SfMLearner). Thanks for their contribution!
 
-Also thanks for impressive works including [MonoPCC](https://github.com/adam99goat/MonoPCC), [DVSMono](https://github.com/adam99goat/DVSMono),[DARES](https://github.com/mobarakol/DARES) and [Depth Anything](https://github.com/DepthAnything)!!!
+Also thanks for impressive works including [MonoPCC](https://github.com/adam99goat/MonoPCC), [DVSMono](https://github.com/adam99goat/DVSMono), [DARES](https://github.com/mobarakol/DARES) and [Depth Anything](https://github.com/DepthAnything), which also provide the inspiration and experiments setting for this project!!!
 
 Codes from [AdaLoRA](https://github.com/QingruZhang/AdaLoRA) and [HydraLora](https://github.com/Clin0212/HydraLoRA) are also utilized for experiments in this project. Thanks sincerely!
