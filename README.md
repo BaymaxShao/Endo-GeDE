@@ -84,11 +84,18 @@ python evaluate_depth.py --data_path <data_path> --load_weights_folder <weights_
 ## Evaluation of Ego-motion Estimation
 Firstly export ground truth of SCARED dataset:
 ```
-python export_gt_depth.py --data_path <data_path> --sequence 1/2/3/4
+python export_gt_pose.py --data_path <data_path> --sequence 1/2/3/4
 ```
 Then evaluate the ego-motion estimation model on exported trajectories:
 ```
-python evaluate_depth.py --data_path <data_path> --load_weights_folder <weights_path> --model_type <model_type>
+python evaluate_pose.py --data_path <data_path> --load_weights_folder <weights_path> --model_type <model_type>
 ```
 The parse setting of `model_type` is same as the above table. 
 (only the ego-motion estimation weights of EndoDAC, DARES, MonoPCC, IID-SfM and AF-SfM are available.)
+
+## Ackonwledgements
+This project is built based on [EndoDAC](https://github.com/BeileiCui/EndoDAC), [IID-SfMLearner](https://github.com/bobo909/IID-SfmLearner) and [AF-SfMLearner](https://github.com/ShuweiShao/AF-SfMLearner). Thanks for their published codes!
+
+Also thanks for impressive works including [MonoPCC](https://github.com/adam99goat/MonoPCC), [DVSMono](https://github.com/adam99goat/DVSMono),[DARES](https://github.com/mobarakol/DARES) and [Depth Anything](https://github.com/DepthAnything)!!!
+
+Codes from [AdaLoRA](https://github.com/QingruZhang/AdaLoRA) and [HydraLora](https://github.com/Clin0212/HydraLoRA) are also utilized for experiments in this project. Thanks sincerely!
