@@ -1,6 +1,6 @@
-<p align="center">
-<img src="https://capsule-render.vercel.app/api?type=waving&height=300&color=0000FF&text=GD-EMoDE&fontAlign=50&fontAlignY=30&fontColor=FFFFFF&desc=Generalizable%20Self-supervised%20Monocular%20Depth%20Estimation%20for%20Diverse%20Endoscopic%20Scenes" />
-</p>
+
+# GD-EMoDE: \<G\>eneralizable Self-supervised <ins>Mo</ins>nocular <ins>D</ins>epth <ins>E</ins>stimation with Block-wise Mixture of Low-Rank Experts for \<D\>iverse <ins>E</ins>ndoscopic Scenes
+
 
 ![](assets/teaser.png)
 
