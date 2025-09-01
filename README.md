@@ -1,5 +1,5 @@
 
-# GD-EMoDE: \<G\>eneralizable Self-supervised <ins>Mo</ins>nocular <ins>D</ins>epth <ins>E</ins>stimation with Block-wise Mixture of Low-Rank Experts for \<D\>iverse <ins>E</ins>ndoscopic Scenes
+# EndoGeDE: \<Ge\>neralizable Self-supervised Monocular \<D\>epth \<E\>stimation with Mixture of Low-Rank Experts for Diverse \<Endo\>scopic Scenes
 
 
 ![](assets/teaser.png)
