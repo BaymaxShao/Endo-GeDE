@@ -4,7 +4,7 @@
 
 ![](assets/teaser.png)
 
-Here is the pre-released implementation for "**G**eneralizable Self-supervised <ins>Mo</ins>nocular <ins>D</ins>epth <ins>E</ins>stimation with Block-wise Mixture of Low-Rank Experts for **D**iverse <ins>E</ins>ndoscopic Scenes". 
+Here is the pre-released implementation for "**Ge**neralizable Monocular **D**epth **E**stimation with Block-wise Mixture of Low-Rank Experts for Diverse **Endo**scopic Scenes". 
 
 In this repository, **the evaluation code and instruction** have been released. <ins>The whole code will be published upon acceptance</ins>.
 ## Table of Contents
@@ -43,7 +43,7 @@ Trained on _SCARED dataset_ for **Realistic Datasets**:
 |DVSMono|**BIBM'24**|0.055|0.410|4.797|0.078|0.975|[Official Repo](https://github.com/adam99goat/DVSMono/tree/main/AF_training_split)|
 |EndoDAC|**MICCAI'24**|0.052|0.362|4.464|0.072|0.979|[Official Repo](https://github.com/BeileiCui/EndoDAC/tree/main?tab=readme-ov-file#results)|
 |MonoPCC|**MedIA'25**|0.051|0.349|4.488|0.072|0.983|[Official Repo](https://github.com/adam99goat/MonoPCC/tree/main/evaluation_results/AF_training_split)|
-|**GD-EMoDE**|**Ours**|**0.047**|**0.307**|**4.206**|**0.067**|**0.985**|Download [Here](https://drive.google.com/file/d/1H2Zw4Slc9QsBrgsUQ8zbG0XOYEgdXB50/view?usp=sharing)|
+|**EndoGeDE**|**Ours**|**0.047**|**0.307**|**4.206**|**0.067**|**0.985**|Download [Here](https://drive.google.com/file/d/1H2Zw4Slc9QsBrgsUQ8zbG0XOYEgdXB50/view?usp=sharing)|
 
 Trained on _SimCol dataset_ for **Simulated Datasets**:
 |Methods|From|Abs Rel|Sq Rel|RMSE|RMSE Log|$\delta$|Pretrained Weight|
@@ -51,7 +51,7 @@ Trained on _SimCol dataset_ for **Simulated Datasets**:
 |AF-SfMLearner|**MedIA'22**|0.086|0.080|0.426|0.109|0.950|Download [Here](https://drive.google.com/file/d/1H2Zw4Slc9QsBrgsUQ8zbG0XOYEgdXB50/view?usp=sharing)|
 |IID-SfMLearner|**JBHI'24**|0.080|0.069|0.429|**0.108**|**0.959**|Download [Here](https://drive.google.com/file/d/1H2Zw4Slc9QsBrgsUQ8zbG0XOYEgdXB50/view?usp=sharing)|
 |EndoDAC|**MICCAI'24**|0.107|0.110|0.530|0.133|0.924|Download [Here](https://drive.google.com/file/d/1H2Zw4Slc9QsBrgsUQ8zbG0XOYEgdXB50/view?usp=sharing)|
-|**GD-EMoDE**|**Ours**|**0.078**|**0.056**|**0.421**|0.109|**0.959**|Download [Here](https://drive.google.com/file/d/1H2Zw4Slc9QsBrgsUQ8zbG0XOYEgdXB50/view?usp=sharing)|
+|**EndoGeDE**|**Ours**|**0.078**|**0.056**|**0.421**|0.109|**0.959**|Download [Here](https://drive.google.com/file/d/1H2Zw4Slc9QsBrgsUQ8zbG0XOYEgdXB50/view?usp=sharing)|
 
 **Download [Here](https://drive.google.com/file/d/1H2Zw4Slc9QsBrgsUQ8zbG0XOYEgdXB50/view?usp=sharing)**: Some weights are from training based on the published codes by ourselves, which are stored in _Google Drive_.
 
